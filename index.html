@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>To Do App</title>
+        <link href="todoAppLogo.svg" rel="icon">
+        <title>Todo App</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->
@@ -16,18 +17,19 @@
             <h1>Todos</h1>
             <form>
                 <div class="form-group">
-                <label for="exampleInputEmail1">New Todo</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="input">New todo</label>
+                <input type="text" class="form-control" id="input" placeholder="Write todo here...">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">Cras justo odio<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
+                <li class="list-group-item">Dapibus ac facilisis in<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
+                <li class="list-group-item">Morbi leo risus<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
+                <li class="list-group-item">Porta ac consectetur ac<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
+                <li class="list-group-item">Vestibulum at eros<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
             </ul>
+            <div class="twtrLink"><a href="https://www.twitter.com/KevalinKetcham">@KevalinKetcham</a></div>
         </div>
     </body>
 </html>

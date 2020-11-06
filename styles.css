@@ -1,3 +1,30 @@
 .container {
     width: 80%;
 }
+
+h1, form, ul {
+    margin: 3% 0;
+}
+
+.ulBtns {
+    float: right;
+    display: none;
+}
+
+.ulBtn {
+    margin: 0 5px;
+}
+
+ul:hover .ulBtns {
+    display: block;
+}
+
+.twtrLink {
+    text-align: center;
+}
+
+.twtrLink a {
+    margin: auto;
+    bottom: 20px;
+    position: absolute;
+}

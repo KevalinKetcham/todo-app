@@ -15,7 +15,7 @@ MongoClient.connect(url, function(err, client) {
             todo: 'Poke cow'
         }).then((result) => {
             console.log(`Todo inserted: ${result}`);
-    })
+    });
 
     // Read todos
     const readValues = db.collection('todos').find({});
