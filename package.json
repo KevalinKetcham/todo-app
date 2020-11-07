@@ -2,9 +2,9 @@
   "name": "todo-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "frontend.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon frontend.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KevalinKetcham/todo-app#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.11",
