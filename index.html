@@ -18,18 +18,27 @@
             <form>
                 <div class="form-group">
                 <label for="input">New todo</label>
-                <input type="text" class="form-control" id="input" placeholder="Write todo here...">
+                <input value="test new todo"" type="text" class="form-control" id="input" placeholder="Write todo here...">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button onclick="addTodo()" id="addTodoBtn" type="submit" class="btn btn-primary">Add</button>
             </form>
             <ul class="list-group">
                 <li class="list-group-item">Cras justo odio<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
-                <li class="list-group-item">Dapibus ac facilisis in<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
-                <li class="list-group-item">Morbi leo risus<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
-                <li class="list-group-item">Porta ac consectetur ac<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
-                <li class="list-group-item">Vestibulum at eros<span class="ulBtns"><button type="button" class="btn btn-secondary ulBtn">Edit</button><button type="button" class="btn btn-danger ulBtn">x</button></span></li>
             </ul>
             <div class="twtrLink"><a href="https://www.twitter.com/KevalinKetcham">@KevalinKetcham</a></div>
         </div>
+        <script>
+            const appURL = "https://kevalinketcham.github.io/todo-app/";
+        
+            // const newTodo = document.getElementById("input")
+
+            function addTodo() {
+                // alert(newTodo.value)
+
+                fetch(appURL, )
+            };
+
+            fetch()
+        </script>
     </body>
 </html>

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KevalinKetcham/todo-app#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.11",
     "node": "^15.0.1",
