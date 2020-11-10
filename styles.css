@@ -18,6 +18,15 @@ ul:hover .ulBtns {
     display: block;
 }
 
+/* Update todo input */
+.liItm {
+    display: block;
+}
+
+.editInput {
+    width: 60%;
+}
+
 .twtrLink {
     text-align: center;
 }

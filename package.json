@@ -2,9 +2,9 @@
   "name": "todo-app",
   "version": "1.0.0",
   "description": "",
-  "main": "frontend.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon frontend.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "json": "^10.0.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.11",
     "node": "^15.0.1",

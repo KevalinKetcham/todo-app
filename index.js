@@ -3,48 +3,47 @@ const app = express();
 
 const MongoClient = require('mongodb').MongoClient;
 const password = 'Quetwaq`123';
-const url = `mongodb+srv://kevalin:${password}@cluster0.ykbkz.mongodb.net/todos?retryWrites=true&w=majority`;
+const url = `mongodb+srv://kevalin:${password}@cluster0.ykbkz.mongodb.net/todoApp?retryWrites=true&w=majority`;
 const assert = require('assert');
 
 const PORT = 3000
 const cors = require('cors');
 const { write } = require('fs');
 const { send } = require('process');
+const { response } = require('express');
+const { read } = require('fs/promises');
 app.use(cors());
+app.use(require("body-parser").json());
 
 // Use connect method to connect to the Server
 MongoClient.connect(url, function(err, client) {
     assert.equal(null, err);
     console.log("Connected to database");
-    const db = client.db("todos");
-    
+    const collection = client.db("todoApp").collection('todos');
+
     // Create todo
     app.post("/", (req, res) => {
-        console.log("POST invoked")
-        // db.collection('todos').insertOne({
-        //         todo: 'Poke cow'
-        //     }).then((result) => {
-        //         console.log(`Todo inserted: ${result}`);
-        // });
+        console.log("POST invoked");
+        collection.insertOne({
+            ...req.body
+        }).then((res) => {
+            console.log(`Todo inserted: ${res}`);
+        });
     });
 
     // Read todos
-    app.get("/", (req,res) => {
-        res.sendFile(__dirname+'/index.html');
-        console.log("GET invoked")
-        // const readValues = db.collection('todos').find({});
+    app.get("/", async (req, res) => {
+        console.log("GET invoked");
 
-        // function displayValues(doc) {
-        //     console.log(JSON.stringify(doc, null, 4));
-        // };
-    
-        // function readErr(error) {
-        //     console.log(error);
-        // };
+        let todos = [];
 
-        // readValues.forEach(displayValues, readErr);    
+        await collection.find({}).forEach(doc => {
+            todos.push(doc);
+        });
+
+        res.send(todos);
     });
-    
+
     // Update todo
     app.put("/", (req, res) => {
         console.log("PUT invoked")
@@ -66,10 +65,9 @@ MongoClient.connect(url, function(err, client) {
         // });
     });
 
-    console.log(`Command successful. DB: ${db}`)
-    client.close();
+    console.log("Command successful.")
 
     const listen = app.listen(PORT, () => {
-        console.log(`Your app is listening on port ${PORT}`);
+        console.log(`App is listening on port ${PORT}`);
     });
 });
