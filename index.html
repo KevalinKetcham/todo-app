@@ -57,6 +57,9 @@
             })
             .catch(function (err) {
                 console.log('Cannot fetch todos. Err: ' + err);
+                if (err == "TypeError: Failed to fetch") {
+                    alert("Backend is off");
+                }
             });
 
             function appendData(data) {
