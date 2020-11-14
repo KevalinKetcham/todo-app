@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 const password = 'Quetwaq`123';
 const url = `mongodb+srv://kevalin:${password}@cluster0.ykbkz.mongodb.net/todoApp?retryWrites=true&w=majority`;
 const assert = require('assert');
@@ -22,9 +23,9 @@ MongoClient.connect(url, function(err, client) {
     const collection = client.db("todoApp").collection('todos');
 
     // Create todo
-    app.post("/", (req, res) => {
+    app.post("/", async (req, res) => {
         console.log("POST invoked");
-        collection.insertOne({
+        await collection.insertOne({
             ...req.body
         }).then((res) => {
             console.log(`Todo inserted: ${res}`);
@@ -47,7 +48,7 @@ MongoClient.connect(url, function(err, client) {
     // Update todo
     app.put("/", (req, res) => {
         console.log("PUT invoked")
-        // db.collection('todos').updateOne(
+        // collection.updateOne(
         //     { todo: 'Poke cow' },
         //     { $set: { todo: 'Pat cow' } }
         // ).then((result) => {
@@ -56,13 +57,13 @@ MongoClient.connect(url, function(err, client) {
     });
 
     // Delete todo
-    app.delete("/", (req, res) => {
+    app.delete("/", async (req, res) => {
         console.log("DELETE invoked")
-        // db.collection('todos').deleteOne({
-        //     todo: "Poke cow"
-        // }).then((result) => {
-        //     console.log(`Deleted todo: ${result}`)
-        // });
+        await collection.deleteOne({
+            "_id": ObjectId(req.body.id)
+        }).then((result) => {
+            console.log(`Deleted todo: ${result}`)
+        });
     });
 
     console.log("Command successful.")

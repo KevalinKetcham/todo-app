@@ -41,7 +41,7 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(newTodo)
-            }).then(readTodos());
+            }).then(reloadPage());
         };
 
         // Read todos
@@ -61,6 +61,7 @@
                     for (var i = 0; i < data.length; i++) {
                         let liGroup = document.createElement("li");
                         liGroup.setAttribute('class', 'list-group-item');
+                        liGroup.setAttribute('id', data[i]._id);
 
                         let todo = document.createElement("span");
                         todo.setAttribute('class', 'todos');
@@ -73,16 +74,19 @@
 
                         // Edit Button
                         let editBtn = document.createElement("button");
-                        editBtn.setAttribute('onclick', 'updateTodo()');
+                        editBtn.setAttribute('onclick', 'updateTodo(this.id)');
                         editBtn.setAttribute('type', 'button');
                         editBtn.setAttribute('class', 'btn btn-secondary ulBtn');
+                        editBtn.setAttribute('id', data[i]._id);
+
                         editBtn.innerHTML = "Edit";
 
                         // Delete Button
                         let deleteBtn = document.createElement("button");
-                        deleteBtn.setAttribute('onclick', 'deleteTodo()');
+                        deleteBtn.setAttribute('onclick', 'deleteTodo(this.id)');
                         deleteBtn.setAttribute('type', 'button');
                         deleteBtn.setAttribute('class', 'btn btn-danger ulBtn');
+                        deleteBtn.setAttribute('id', data[i]._id);
                         deleteBtn.innerHTML = "Delete";
 
                         ulBtns.appendChild(editBtn);
@@ -122,15 +126,29 @@
         function updateTodo() {
             fetch(appURL, {
                 method: "PUT",
-            }).then(console.log("updateTodo() activated"))
+            }).then(reloadPage())
         }
 
         // Delete todo
-        function deleteTodo() {
+        function deleteTodo(id) {
+            let delId = {
+                id: id
+            }
+
             fetch(appURL, {
                 method: "DELETE",
-            }).then(console.log("deleteTodo() activated"))
-        }
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(delId)
+            })
+            .then(reloadPage());
+        };
+
+        // Reload page
+        function reloadPage() {
+            location.reload();
+        };
 
     </script>
 </html>
