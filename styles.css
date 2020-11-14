@@ -28,11 +28,10 @@ ul:hover .ulBtns {
 }
 
 .twtrLink {
-    text-align: center;
+    text-align: right;
 }
 
 .twtrLink a {
-    margin: auto;
-    bottom: 20px;
-    position: absolute;
+    bottom: 10px;
+    position: fixed;
 }

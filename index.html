@@ -19,7 +19,7 @@
                 <label for="input">New todo</label>
                 <input type="text" class="form-control" id="input" placeholder="Write todo here...">
             </div>
-            <button onclick="createTodo()" id="addTodoBtn" type="submit" class="btn btn-primary">Add</button>
+            <button onclick="createTodo();" id="addTodoBtn" type="submit" class="btn btn-primary">Add</button>
             <ul id="todosUl" class="list-group">
                 <!-- GET data displayed here -->
             </ul>
@@ -54,6 +54,45 @@
             })
             .then(function (todos) {
                 appendData(todos);
+                
+                function appendData(data) {
+                    const todosUl = document.getElementById("todosUl");
+                    
+                    for (var i = 0; i < data.length; i++) {
+                        let liGroup = document.createElement("li");
+                        liGroup.setAttribute('class', 'list-group-item');
+
+                        let todo = document.createElement("span");
+                        todo.setAttribute('class', 'todos');
+
+                        todo.innerHTML = data[i].todo;
+
+                        // Edit & Delete Button Group
+                        let ulBtns = document.createElement("span");
+                        ulBtns.setAttribute('class', 'ulBtns');
+
+                        // Edit Button
+                        let editBtn = document.createElement("button");
+                        editBtn.setAttribute('onclick', 'updateTodo()');
+                        editBtn.setAttribute('type', 'button');
+                        editBtn.setAttribute('class', 'btn btn-secondary ulBtn');
+                        editBtn.innerHTML = "Edit";
+
+                        // Delete Button
+                        let deleteBtn = document.createElement("button");
+                        deleteBtn.setAttribute('onclick', 'deleteTodo()');
+                        deleteBtn.setAttribute('type', 'button');
+                        deleteBtn.setAttribute('class', 'btn btn-danger ulBtn');
+                        deleteBtn.innerHTML = "Delete";
+
+                        ulBtns.appendChild(editBtn);
+                        ulBtns.appendChild(deleteBtn);
+
+                        liGroup.appendChild(todo);
+                        liGroup.appendChild(ulBtns);
+                        todosUl.appendChild(liGroup);
+                    };
+                };
             })
             .catch(function (err) {
                 console.log('Cannot fetch todos. Err: ' + err);
@@ -61,23 +100,6 @@
                     alert("Backend is off");
                 }
             });
-
-            function appendData(data) {
-                const todosUl = document.getElementById("todosUl");
-                
-                for (var i = 0; i < data.length; i++) {
-                    let liGroup = document.createElement("li");
-                    liGroup.setAttribute('class', 'list-group-item');
-
-                    let todo = document.createElement("span");
-                    todo.setAttribute('class', 'todos');
-
-                    todo.innerHTML = data[i].todo
-
-                    liGroup.appendChild(todo);
-                    todosUl.appendChild(liGroup);
-                };
-            };
         };
 
         // <li class="list-group-item">
@@ -94,28 +116,20 @@
         //     </span>
         // </li>
 
-        // fetch(appURL, {
-        //     method: "GET"
-        // }).then(function(res) {
-        //     console.log(res);
-        //     document.write(res);
-        // });
-
         // Update todo
-        function showInput(liItm) {
-        }
-
+        // function showInput(liItm) {
+        // }
         function updateTodo() {
             fetch(appURL, {
                 method: "PUT",
-            });
+            }).then(console.log("updateTodo() activated"))
         }
 
         // Delete todo
         function deleteTodo() {
             fetch(appURL, {
                 method: "DELETE",
-            });
+            }).then(console.log("deleteTodo() activated"))
         }
 
     </script>
