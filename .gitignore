@@ -1,2 +1,3 @@
 # backend JS
-index.js
+.env
+node_modules

@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
+require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
-const password = 'Quetwaq`123';
-const url = `mongodb+srv://kevalin:${password}@cluster0.ykbkz.mongodb.net/todoApp?retryWrites=true&w=majority`;
+const url = process.env.CONNECTION_URL;
 const assert = require('assert');
 
 const PORT = 3000
