@@ -24,7 +24,12 @@ ul:hover .ulBtns {
 }
 
 .editInput {
-    width: 60%;
+    margin: 10px 0;
+    width: 40%;
+}
+
+.updateTodoBtn {
+    margin: 0;
 }
 
 /* Twitter link */

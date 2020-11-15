@@ -62,9 +62,11 @@
                         let liGroup = document.createElement("li");
                         liGroup.setAttribute('class', 'list-group-item');
                         liGroup.setAttribute('id', data[i]._id);
+                        liGroup.setAttribute('style', 'display: block;');
 
                         let todo = document.createElement("span");
                         todo.setAttribute('class', 'todos');
+                        todo.setAttribute('id', 'todoTxt' + data[i]._id);
 
                         todo.innerHTML = data[i].todo;
 
@@ -103,9 +105,9 @@
                         let editTodoBtn = document.createElement("button");
                         editTodoBtn.setAttribute('onclick', 'updateTodo(this.id)');
                         editTodoBtn.setAttribute('type', 'button');
-                        editTodoBtn.setAttribute('class', 'btn btn-primary ulBtn');
+                        editTodoBtn.setAttribute('class', 'updateTodoBtn btn btn-primary ulBtn pull-right');
                         editTodoBtn.setAttribute('id', data[i]._id);
-                        editTodoBtn.innerHTML = "Done";
+                        editTodoBtn.innerHTML = "Submit";
 
                         // Add input & btn to edit todo container
                         editTodoContainer.appendChild(editTodoInput);
@@ -130,14 +132,16 @@
             });
         };
 
-        //     <span class="editTodo">
-        //         <input class="editInput form-control"></input>
-        //         <button onclick="updateTodo()" type="button" class="btn btn-primary ulBtn">Done</button>
-        //     </span>
-
         // Update todo
             // Toggle edit todo container
         function toggleEditContainer(id) {
+            let selectedTodoTxt = document.getElementById('todoTxt' + id)
+            if (selectedTodoTxt.style.display === "none") {
+                selectedTodoTxt.setAttribute('style', 'display: block');
+            } else {
+                selectedTodoTxt.setAttribute('style', 'display: none');
+            }
+
             let selectedEditContainer = document.getElementById('container' + id);
             if (selectedEditContainer.style.display === "none") {
                 selectedEditContainer.setAttribute('style', 'display: block');
