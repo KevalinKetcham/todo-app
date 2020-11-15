@@ -32,7 +32,7 @@
 
         // Create todo
         function createTodo() {
-            newTodo = {
+            let newTodo = {
                 todo: '' + document.getElementById("input").value + ''
             }
             fetch(appURL, {
@@ -74,11 +74,10 @@
 
                         // Edit Button
                         let editBtn = document.createElement("button");
-                        editBtn.setAttribute('onclick', 'updateTodo(this.id)');
+                        editBtn.setAttribute('onclick', 'toggleEditContainer(this.id);');
                         editBtn.setAttribute('type', 'button');
                         editBtn.setAttribute('class', 'btn btn-secondary ulBtn');
                         editBtn.setAttribute('id', data[i]._id);
-
                         editBtn.innerHTML = "Edit";
 
                         // Delete Button
@@ -89,10 +88,35 @@
                         deleteBtn.setAttribute('id', data[i]._id);
                         deleteBtn.innerHTML = "Delete";
 
+                        // Edit todo container
+                        let editTodoContainer = document.createElement("span");
+                        editTodoContainer.setAttribute('class', 'editTodo');
+                        editTodoContainer.setAttribute('id', 'container' + data[i]._id);
+                        editTodoContainer.setAttribute('style', 'display: none;');
+
+                        // Edit todo input
+                        let editTodoInput = document.createElement("input");
+                        editTodoInput.setAttribute('class', 'editInput form-control');
+                        editTodoInput.setAttribute('id', 'editInput' + data[i]._id);
+
+                        // Edit todo btn
+                        let editTodoBtn = document.createElement("button");
+                        editTodoBtn.setAttribute('onclick', 'updateTodo(this.id)');
+                        editTodoBtn.setAttribute('type', 'button');
+                        editTodoBtn.setAttribute('class', 'btn btn-primary ulBtn');
+                        editTodoBtn.setAttribute('id', data[i]._id);
+                        editTodoBtn.innerHTML = "Done";
+
+                        // Add input & btn to edit todo container
+                        editTodoContainer.appendChild(editTodoInput);
+                        editTodoContainer.appendChild(editTodoBtn);
+
+                        // Todo li btns
                         ulBtns.appendChild(editBtn);
                         ulBtns.appendChild(deleteBtn);
 
                         liGroup.appendChild(todo);
+                        liGroup.appendChild(editTodoContainer);
                         liGroup.appendChild(ulBtns);
                         todosUl.appendChild(liGroup);
                     };
@@ -106,27 +130,40 @@
             });
         };
 
-        // <li class="list-group-item">
-        //     <span class="liItm">
-        //         <span class="todos">Cras justo odio</span>
-        //         <span class="ulBtns">
-        //             <button onclick="showInput()" type="button" class="btn btn-secondary ulBtn">Edit</button>
-        //             <button onclick="deleteTodo()" type="button" class="btn btn-danger ulBtn">x</button>
-        //         </span>
-        //     </span>
         //     <span class="editTodo">
         //         <input class="editInput form-control"></input>
         //         <button onclick="updateTodo()" type="button" class="btn btn-primary ulBtn">Done</button>
         //     </span>
-        // </li>
 
         // Update todo
-        // function showInput(liItm) {
-        // }
-        function updateTodo() {
+            // Toggle edit todo container
+        function toggleEditContainer(id) {
+            let selectedEditContainer = document.getElementById('container' + id);
+            if (selectedEditContainer.style.display === "none") {
+                selectedEditContainer.setAttribute('style', 'display: block');
+            } else {
+                selectedEditContainer.setAttribute('style', 'display: none');
+            }
+        }
+
+            // Send update req to backend
+        function updateTodo(id) {
+            let newTodoValue = document.getElementById('editInput' + id).value;            
+            console.log(newTodoValue)
+
+            let updateInfo = {
+                id: id,
+                newValue: newTodoValue
+            }
+
             fetch(appURL, {
                 method: "PUT",
-            }).then(reloadPage())
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updateInfo)
+            })
+            .then(reloadPage())
         }
 
         // Delete todo

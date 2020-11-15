@@ -48,12 +48,12 @@ MongoClient.connect(url, function(err, client) {
     // Update todo
     app.put("/", (req, res) => {
         console.log("PUT invoked")
-        // collection.updateOne(
-        //     { todo: 'Poke cow' },
-        //     { $set: { todo: 'Pat cow' } }
-        // ).then((result) => {
-        //     console.log(`Updated todo: ${result}`);
-        // });
+        collection.updateOne(
+            { "_id": ObjectId(req.body.id) },
+            { $set: { todo: req.body.newValue } }
+        ).then((result) => {
+            console.log(`Updated todo: ${result}`);
+        });
     });
 
     // Delete todo
